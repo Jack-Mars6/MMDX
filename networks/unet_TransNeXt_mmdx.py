@@ -212,7 +212,7 @@ class ConvolutionalGLU(nn.Module):
         super().__init__()
         out_features = out_features or in_features
         hidden_features = hidden_features or in_features
-        hidden_features = int(2 * hidden_features / 3)  #将隐藏特征的数量调整为输入特征的三分之二
+        hidden_features = int(2 * hidden_features / 3)
         self.fc1 = nn.Linear(in_features, hidden_features * 2)
         self.dwconv = DWConv(hidden_features)
         self.act = act_layer()
@@ -220,7 +220,7 @@ class ConvolutionalGLU(nn.Module):
         self.drop = nn.Dropout(drop)
 
     def forward(self, x, H, W):
-        x, v = self.fc1(x).chunk(2, dim=-1)  #将输出沿最后一个维度分成两个部分
+        x, v = self.fc1(x).chunk(2, dim=-1)
         x = self.act(self.dwconv(x, H, W)) * v
         x = self.drop(x)
         x = self.fc2(x)
@@ -845,5 +845,6 @@ if __name__ == "__main__":
     # param count
     total_params = sum(p.numel() for p in net.parameters() if p.requires_grad)
     print(f"Total number of parameters: {total_params}")
+
 
 
