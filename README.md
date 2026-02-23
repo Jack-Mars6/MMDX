@@ -22,7 +22,7 @@ python train_DECT_generate.py
 ```
 
 ## Evaluation
-Calculate the metrics. 
+Calculate the metrics. You can download the model weights [here](https://pan.baidu.com/s/1YfqP280EaOFGIugm5oBtkA?pwd=bw9s).
 ```
 python calculate_phantom.py
 ```
